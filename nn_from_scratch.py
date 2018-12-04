@@ -4,6 +4,9 @@ import numpy as np
 def sigmoid(z): return 1 / (1 + np.exp(-z))
 
 
+def sigmoid_prime(z): return sigmoid(z) * (1 - sigmoid(z))
+
+
 class Network(object):
     def __init__(self, layers):
         self.num_of_layers = len(layers)
