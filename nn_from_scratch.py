@@ -48,3 +48,6 @@ class Network(object):
                 print("Epoch {0}: {1} / {2}".format(epoch, self.evaluate(test_data), test_data_len))
             else:
                 print("Epoch {0} complete".format(epoch))
+
+    def cost_derivative(self, a, y):
+        return a - y
