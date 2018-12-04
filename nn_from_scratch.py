@@ -35,7 +35,17 @@ class Network(object):
         pass
 
     def back_propagation(self, x, y):
-        pass
+        nabla_b, nabla_w = [np.zeros(b) for b in self.bias], [np.zeros(w) for w in self.weights]
+        activations, zs, activation = [x], [], x
+
+        for w, b in zip(self.weights, self.bias):
+            z = np.dot(w, activation) + b
+            zs.append(z)
+
+            activation = sigmoid(z)
+            activations.append(activation)
+
+
 
     def stochastic_gradient_descent(self, train_data, learning_rate, epochs, mini_batch_size, test_data=None):
         if test_data:
