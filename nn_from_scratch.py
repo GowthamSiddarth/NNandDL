@@ -21,7 +21,7 @@ class Network(object):
     def update_mini_batch(self, mini_batch, learning_rate):
         nabla_b, nabla_w = [np.zeros(b.shape) for b in self.bias], [np.zeros(w.shape) for w in self.weights]
         for x, y in mini_batch:
-            delta_nabla_b, delta_nabla_w = self.back_propogation(x, y)
+            delta_nabla_b, delta_nabla_w = self.back_propagation(x, y)
             nabla_b = [nb + dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
             nabla_w = [nw + dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
 
@@ -31,7 +31,7 @@ class Network(object):
     def evaluate(self, test_data):
         pass
 
-    def back_propogation(self, x, y):
+    def back_propagation(self, x, y):
         pass
 
     def stochastic_gradient_descent(self, train_data, learning_rate, epochs, mini_batch_size, test_data=None):
