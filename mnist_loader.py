@@ -40,9 +40,9 @@ def load_data(path):
     That's done in the wrapper function ``load_data_wrapper()``, see
     below.
     """
-    f = gzip.open(path, 'rb')
-    training_data, validation_data, test_data = pickle.load(f)
-    f.close()
+    pkl_file = gzip.open(path, 'rb')
+    training_data, validation_data, test_data = pickle.load(pkl_file, encoding='latin1')
+    pkl_file.close()
     return training_data, validation_data, test_data
 
 
