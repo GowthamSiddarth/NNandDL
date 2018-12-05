@@ -46,7 +46,7 @@ class Network(object):
             activation = sigmoid(z)
             activations.append(activation)
 
-        delta = self.cost_derivative(activations[-1], y) * sigmoid_prime(zs[-1])
+        delta = Network.cost_derivative(activations[-1], y) * sigmoid_prime(zs[-1])
         nabla_b[-1] = delta
         nabla_w[-1] = np.dot(delta, activations[-2].transpose())
 
@@ -72,5 +72,6 @@ class Network(object):
             else:
                 print("Epoch {0} complete".format(epoch))
 
-    def cost_derivative(self, a, y):
+    @staticmethod
+    def cost_derivative(a, y):
         return a - y
