@@ -32,11 +32,11 @@ class Network(object):
         self.bias = [b - (learning_rate / len(mini_batch)) * nb for b, nb in zip(self.bias, nabla_b)]
 
     def evaluate(self, test_data):
-        test_results = [(np.argmax(self.feed_forward(x), y)) for x, y in test_data]
+        test_results = [(np.argmax(self.feed_forward(x)), y) for x, y in test_data]
         return sum(int(x == y) for x, y in test_results)
 
     def back_propagation(self, x, y):
-        nabla_b, nabla_w = [np.zeros(b) for b in self.bias], [np.zeros(w) for w in self.weights]
+        nabla_b, nabla_w = [np.zeros(b.shape) for b in self.bias], [np.zeros(w.shape) for w in self.weights]
         activations, zs, activation = [x], [], x
 
         for w, b in zip(self.weights, self.bias):
@@ -51,7 +51,7 @@ class Network(object):
         nabla_w[-1] = np.dot(delta, activations[-2].transpose())
 
         for l in range(2, self.num_of_layers):
-            delta = np.dot(self.weights(-l + 1).transpose(), delta) * sigmoid_prime(zs[-l])
+            delta = np.dot(self.weights[-l + 1].transpose(), delta) * sigmoid_prime(zs[-l])
             nabla_b[-l] = delta
             nabla_w[-l] = np.dot(delta, activations[-l - 1].transpose())
 
